@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e7f3fe;
+            background-image: url('https://img.freepik.com/free-vector/realistic-bright-bokeh-background_23-2149342929.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px; /* Added padding for mobile responsiveness */
+        }
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 100%; /* Changed to 100% for mobile responsiveness */
+            box-sizing: border-box; /* Includes padding in width calculation */
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 2em; /* Increased font size for better visibility */
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0; /* Increased margin for better spacing between fields */
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box; /* Includes padding in width calculation */
+        }
+        button {
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #fda085;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+            margin-top: 10px; /* Added margin for space above the button */
+        }
+        button:hover {
+            background-color: #ff8c42;
+        }
+        .link {
+            margin-top: 20px;
+            color: #555;
+            font-size: 1em; /* Adjusted font size */
+        }
+        .link a {
+            color: #fda085;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Sign Up</h2>
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <button>Sign Up</button>
+        <div class="link">Already have an account? <a href="signin.html">Sign In</a></div>
+    </div>
+
+</body>
+</html>

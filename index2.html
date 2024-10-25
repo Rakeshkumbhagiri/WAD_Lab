@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Give Your Testimonials</title>
+    <script src="C:\Users\Pradeep\Downloads\HTML PROJECT-20241018T132223Z-001\HTML PROJECT\js code.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Give Your Testimonials</h1>
+        <form id="testimonial-form">
+            <textarea id="testimonial" placeholder="Write your testimonial here..." required></textarea>
+        </form>
+        <div class="button-container">
+            <button type="submit">Submit Testimonial</button>
+            <button id="show-testimonials">Show Testimonials</button>
+        </div>
+        <div id="testimonial-list" class="hidden">
+            <h2>Testimonials</h2>
+            <ul id="testimonials"></ul>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    document.getElementById('testimonial-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const testimonialInput = document.getElementById('testimonial');
+    const testimonialText = testimonialInput.value;
+
+    if (testimonialText) {
+        addTestimonial(testimonialText);
+        testimonialInput.value = '';
+    }
+});
+
+document.getElementById('show-testimonials').addEventListener('click', function() {
+    const testimonialList = document.getElementById('testimonial-list');
+    testimonialList.classList.toggle('hidden');
+});
+
+const testimonialsArray = [];
+
+function addTestimonial(text) {
+    testimonialsArray.push(text);
+    renderTestimonials();
+}
+
+function renderTestimonials() {
+    const testimonialsList = document.getElementById('testimonials');
+    testimonialsList.innerHTML = '';
+    testimonialsArray.forEach(function(testimonial) {
+        const li = document.createElement('li');
+        li.textContent = testimonial;
+        testimonialsList.appendChild(li);
+    });
+}
+/* giving coding for submitting testimonials */
+
+    document.getElementById('testimonial-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const testimonialInput = document.getElementById('testimonial');
+        const testimonialText = testimonialInput.value;
+
+        if (testimonialText) {
+            // Send testimonial to backend
+            fetch('http://localhost:3000/api/testimonials', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ testimonial: testimonialText }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    console.log(data.message);
+                    testimonialInput.value = '';
+                    fetchTestimonials(); // Fetch updated testimonials
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    });
+
+    document.getElementById('show-testimonials').addEventListener('click', function() {
+        const testimonialList = document.getElementById('testimonial-list');
+        testimonialList.classList.toggle('hidden');
+        fetchTestimonials(); // Fetch testimonials on button click
+    });
+
+    function fetchTestimonials() {
+        fetch('http://localhost:3000/api/testimonials')
+            .then(response => response.json())
+            .then(data => {
+                testimonialsArray = data; // Update the local array
+                renderTestimonials();
+            })
+            .catch(error => console.error('Error fetching testimonials:', error));
+    }
+
+    function renderTestimonials() {
+        const testimonialsList = document.getElementById('testimonials');
+        testimonialsList.innerHTML = '';
+        testimonialsArray.forEach(function(testimonial) {
+            const li = document.createElement('li');
+            li.textContent = testimonial;
+            testimonialsList.appendChild(li);
+        });
+    }
+
+
+</script>
+<style>
+   body {
+    font-family:Lucida,Cursive;
+    background-image: url('background2.jpeg'); /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 70px;
+    color: #333;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 70px;
+    background: transparent; /* Semi-transparent background */
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Softer shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(10px); /* Blur effect for a frosted glass look */
+}
+
+h1, h2 {
+    text-align: center;
+    margin-bottom: 30px; /* Reduced margin for a tighter layout */
+    font-weight: 600;
+    color: #2C3E50;
+}
+
+textarea {
+    width: 100%;
+    height: 120px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 2px solid #28a745;
+    border-radius: 12px; /* Softer rounded corners */
+    font-size: 16px;
+    resize: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    transition: border-color 0.3s ease;
+}
+
+textarea:focus {
+    border-color: #218838; /* Highlight border on focus */
+    outline: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+button {
+    flex: 1; /* Each button takes up equal space */
+    margin: 10px; /* Spacing between buttons */
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #28a745, #218838); /* Gradient background */
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    font-weight: 600;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #218838, #1e7e34); /* Darken gradient on hover */
+    transform: translateY(-3px); /* Lift effect */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+.hidden {
+    display: none;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    margin-top: 20px;
+}
+
+li {
+    background: rgba(255, 255, 255, 0.6); /* Lighter background with transparency */
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for testimonials */
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+li:hover {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+}
+
+/* Smooth transition for buttons and inputs */
+textarea, button {
+    transition: all 0.3s ease;
+}
+
+</style>
+
+
