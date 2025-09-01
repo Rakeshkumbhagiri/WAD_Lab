@@ -1,9 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Motivational Testimonials</title>
+  <meta charset="UTF-8">
+  <title>Motivational Testimonials</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* 1. Search box at top-right */
+    #search-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 280px;
+      background-color: #fff8f0;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    }
+
+    #searchBox {
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+    }
+
+    /* 3. Smaller testimonial text */
+    #testimonialList {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #testimonialList li {
+      font-size: 13px;
+      color: #444;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    /* 2. Center personalized section */
+    #personalized-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 150px;
+      text-align: center;
+    }
+
+    #personalized-section input {
+      padding: 8px;
+      margin-top: 10px;
+      font-size: 14px;
+      width: 200px;
+    }
+
+    #personalized-section button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Search testimonial box -->
+  <div id="search-container">
+    <input type="text" id="searchBox" placeholder="Search testimonials...">
+    <ul id="testimonialList">
+      <li>e.g:Never give up on your dreams,</li>
+      <li>Kindness changed my life.</li>
+    </ul>
+  </div>
+
+  
+
+</body>
+</html>
+
+
     <style>
         body {
             font-family: Lucida, Cursive;
@@ -62,6 +141,7 @@
             font-size: 1.5em;
             color: #282626;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            /* Container for search and testimonials */
         }
     </style>
 </head>
@@ -77,6 +157,7 @@
 
         <div id="testimonialOutput" class="testimonial"></div>
     </div>
+    
 
     <script>
         const testimonials = [
@@ -128,6 +209,15 @@
                 alert("Please enter your name.");
             }
         }
+        //newly added
+        document.getElementById("searchBox").addEventListener("input", function() {
+  const query = this.value.toLowerCase();
+  document.querySelectorAll("#testimonialList li").forEach(item => {
+    item.style.display = item.textContent.toLowerCase().includes(query) ? "list-item" : "none";
+  });
+});
+       
+
     </script>
 
 </body>
