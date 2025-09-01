@@ -23,7 +23,14 @@
     </div>
 </body>
 </html>
-
+<section id="submit-testimonial">
+  <h2>Share Your Story</h2>
+  <form id="testimonialForm">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <textarea name="story" placeholder="Your Testimonial" required></textarea>
+    <button type="submit">Submit</button>
+  </form>
+</section>
 <script>
     document.getElementById('testimonial-form').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -90,6 +97,11 @@ function renderTestimonials() {
         testimonialList.classList.toggle('hidden');
         fetchTestimonials(); // Fetch testimonials on button click
     });
+     document.querySelectorAll("button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    alert("Feature coming soon!");
+  });
+});
 
     function fetchTestimonials() {
         fetch('http://localhost:3000/api/testimonials')
@@ -219,5 +231,6 @@ textarea, button {
 }
 
 </style>
+
 
 
